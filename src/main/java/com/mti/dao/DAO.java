@@ -1,8 +1,13 @@
 package com.mti.dao;
 
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
+import javax.ws.rs.core.MultivaluedMap;
 import java.util.ArrayList;
 
 /**
@@ -10,10 +15,12 @@ import java.util.ArrayList;
  */
 
 public abstract class DAO<T> {
-    @PersistenceContext(unitName = "jee-project")
+    @PersistenceContext(unitName = "intrapu")
     protected EntityManager manager;
 
 
+    @Resource
+    protected UserTransaction userTransaction;
     /**
      * Permet de récupérer un objet via son ID
      * @return ArrayList<T>
@@ -32,17 +39,18 @@ public abstract class DAO<T> {
      * par rapport à un objet
      * @param obj T
      */
-    public abstract T create(T obj);
+    public abstract T create(T obj) throws SystemException;
 
     /**
      * Permet de mettre à jour les données d'une entrée dans la base
-     * @param obj T
+     * @param formParams MultivaluedMap<String, String>
+     * @param id Integer
      */
-    public abstract T update(T obj);
+    public abstract T update(Integer id, MultivaluedMap<String, String> formParams) throws SystemException;
 
     /**
      * Permet la suppression d'une entrée de la base
-     * @param obj T
+     * @param id Integer
      */
-    public abstract void delete(T obj);
+    public abstract Boolean delete(Integer id);
 }
