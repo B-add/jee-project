@@ -17,6 +17,7 @@ public class API extends Application {
     private Set<Class<?>> getRestResourceClasses() {
         Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
         resources.add(UserWebServices.class);
+        resources.add(BlogWebServices.class);
         return resources;
     }
 }

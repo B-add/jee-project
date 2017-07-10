@@ -32,6 +32,7 @@ public class UserDAO extends DAO<User> {
 
     @Override
     public User find(int id) {
+        System.out.println(manager);
         User u;
         try {
             u = manager.createQuery(
@@ -39,6 +40,7 @@ public class UserDAO extends DAO<User> {
                     .setParameter("id", id)
                     .getSingleResult();
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new NotFoundException();
         }
         return u;
