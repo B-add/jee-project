@@ -17,6 +17,7 @@ public class API extends Application {
         Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
         //WS Files
         // Example : resources.add(UserWebService.class);
+        resources.add(UserServices.class);
         return resources;
     }
 }

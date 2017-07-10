@@ -15,8 +15,21 @@ public class UserServices {
 
     @GET
     @Path("/{userId}")
-    public User setMessageRead(@QueryParam("token") final String token,
-                               @PathParam("messageId") final Integer messageId)
+    public int getUserById(@PathParam("userId") final Integer userId)
+    {
+        return userId;
+    }
+
+    @POST
+    @Consumes("application/json")
+    public User addUser(final String content)
+    {
+        return null;
+    }
+
+    @PUT
+    @Consumes("application/json")
+    public User editUser(final String content)
     {
         return null;
     }
