@@ -25,6 +25,4 @@ public class Blog {
     @ManyToOne
     private User owner;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "blog")
-    private List<Post> posts;
 }

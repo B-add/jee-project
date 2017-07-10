@@ -28,6 +28,4 @@ public class User {
     @Column(name = "salt")
     private String salt;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Blog> blogs;
 }
