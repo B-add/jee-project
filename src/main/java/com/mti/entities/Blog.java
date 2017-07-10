@@ -1,6 +1,7 @@
 package com.mti.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by val on 10/07/17.
@@ -18,4 +19,7 @@ public class Blog {
 
     @ManyToOne
     private User owner;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "blog")
+    private List<Post> posts;
 }
