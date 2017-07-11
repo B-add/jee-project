@@ -74,10 +74,10 @@ public class CommentWebServices {
 
 
     @POST
-    @Path("/getCommentByPost/")
+    @Path("/getCommentsByPost/")
     @Consumes("application/x-www-form-urlencoded")
-    public ArrayList<Comment> getCommentByPostId(@Context final HttpServletRequest request,
+    public ArrayList<Comment> getCommentsByPostId(@Context final HttpServletRequest request,
                            @FormParam("postId") String postId) throws NotFoundException, SystemException {
-        return cdao.getCommentByPostId(Integer.parseInt(postId));
+        return cdao.getCommentsByPostId(Integer.parseInt(postId));
     }
 }

@@ -84,7 +84,7 @@ public class CommentDAO extends DAO<Comment> {
         return true;
     }
 
-    public ArrayList<Comment> getCommentByPostId(int postId) {
+    public ArrayList<Comment> getCommentsByPostId(int postId) {
         ArrayList<Comment> comments;
         try {
             comments = new ArrayList(manager.createQuery("SELECT comment FROM Comment comment WHERE comment.post.id = :postId")

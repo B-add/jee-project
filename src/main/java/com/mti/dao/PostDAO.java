@@ -7,7 +7,6 @@ import javax.transaction.SystemException;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.MultivaluedMap;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -84,5 +83,18 @@ public class PostDAO extends DAO<Post> {
             throw new NotFoundException();
         }
         return true;
+    }
+
+    public ArrayList<Post> getPostsByBlogId(int blogId) {
+        ArrayList<Post> posts;
+        try {
+            posts = new ArrayList(manager.createQuery("SELECT post FROM Post post WHERE post.blog.id = :blogId")
+                    .setParameter("blogId", blogId)
+                    .getResultList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new NotFoundException();
+        }
+        return posts;
     }
 }

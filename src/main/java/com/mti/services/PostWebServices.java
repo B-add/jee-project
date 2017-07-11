@@ -74,4 +74,12 @@ public class PostWebServices {
                         @PathParam("postId") final Integer postId) throws NotFoundException {
         return pdao.delete(postId);
     }
+
+    @POST
+    @Path("/getPostsByBlog/")
+    @Consumes("application/x-www-form-urlencoded")
+    public ArrayList<Post> getPostsByBlogId(@Context final HttpServletRequest request,
+                                                 @FormParam("blogId") String blogId) throws NotFoundException, SystemException {
+        return pdao.getPostsByBlogId(Integer.parseInt(blogId));
+    }
 }
