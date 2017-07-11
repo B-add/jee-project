@@ -71,7 +71,9 @@
                             <h:outputText value="#{comment.author.username}" style="font-weight: bold"/>
 
                             <h:outputText value="date:" />
-                            <h:outputText value="#{comment.date}" style="font-weight: bold"/>
+                            <h:outputText value="#{comment.date}" style="font-weight: bold">
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                            </h:outputText>
 
                             <h:outputText value="Commentaire:" />
                             <p:scrollPanel mode="native" style="width:1000px;height:300px">
