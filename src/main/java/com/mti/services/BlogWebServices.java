@@ -72,4 +72,12 @@ public class BlogWebServices {
                            @FormParam("isArchive") String shouldArchive) throws NotFoundException, SystemException {
         return bdao.setArchive(blogId, Boolean.valueOf(shouldArchive));
     }
+
+    @POST
+    @Path("/getBlogsByOwner/")
+    @Consumes("application/x-www-form-urlencoded")
+    public ArrayList<Blog> getBlogsByOwnerId(@Context final HttpServletRequest request,
+                                            @FormParam("userId") String userId) throws NotFoundException, SystemException {
+        return bdao.getBlogsByOwnerId(Integer.parseInt(userId));
+    }
 }

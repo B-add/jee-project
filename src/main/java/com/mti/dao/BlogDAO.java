@@ -98,4 +98,17 @@ public class BlogDAO extends DAO<Blog> {
         return blog;
     }
 
+
+    public ArrayList<Blog> getBlogsByOwnerId(int userId) {
+        ArrayList<Blog> blogs;
+        try {
+            blogs = new ArrayList(manager.createQuery("SELECT blog FROM Blog blog WHERE blog.owner.id = :userId")
+                    .setParameter("userId", userId)
+                    .getResultList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new NotFoundException();
+        }
+        return blogs;
+    }
 }
