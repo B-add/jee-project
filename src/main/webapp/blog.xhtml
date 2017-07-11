@@ -43,27 +43,75 @@
             </h:form>
         </p:layoutUnit>
         <p:layoutUnit position="center">
-            <!--<c:forEach var="item" items="list">-->
-                <div style="display:block; text-align:center">
-                    <h1><p:link outcome="test" value="titre">
-                        <f:param name="id" value="id" />
-                    </p:link></h1>
-                    <h3>by me</h3>
-                    <p:separator style="width:150px"/>
-                    <h:outputText value="#body" escape="false"/>
-                    <br />
-                    <p:separator />
-                </div>
-            <div align="center">
-                <p:commandButton actionListener="#{buttonView.buttonAction}" title="Supprimer">
-                <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
-                </p:commandButton>
-                <p:commandButton actionListener="action d'aller sur edition" title="Editer"/>
-            </div>
-           <!--</c:forEach>-->
-            <div style="display:block; text-align:center">
 
+            <c:forEach var="article" items="#{blogView.posts}">
+                <p:separator />
+
+            <div style="display:block; text-align:center">
+                <h1><p:outputLabel value="#{article.title}"/>
+                </h1>
+                <h3>by #{article.author.username}</h3>
+                <p:separator style="width:150px"/>
+                <p:scrollPanel mode="native" style="width:1000px;height:175px">
+                    <h:outputText value="#{article.body}" escape="false" style="font-weight: lighter"/>
+                </p:scrollPanel>
+                <br />
+                <p:separator />
             </div>
+
+            <h:form>
+                <p:dataScroller value="#{commentsView.comments}" var="comment" chunkSize="10">
+                    <f:facet name="header">
+                        Commentaires
+                    </f:facet>
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+
+                            <h:outputText value="Autheur:" />
+                            <h:outputText value="#{comment.author.username}" style="font-weight: bold"/>
+
+                            <h:outputText value="date:" />
+                            <h:outputText value="#{comment.date}" style="font-weight: bold">
+                            <f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+                            </h:outputText>
+
+                            <h:outputText value="Commentaire:" />
+                            <p:scrollPanel mode="native" style="width:1000px;height:300px">
+                                <h:outputText value="#{comment.body}" style="font-weight: lighter"/>
+                            </p:scrollPanel>
+
+
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </p:dataScroller>
+            </h:form>
+
+            <h1>Poster un commentaire</h1>
+            <h:form>
+                <h:outputLabel for="title" value="Title:" />
+                <p:inputText id="title" value="titre" required="true"/>
+                <br />
+                <p:textEditor widgetVar="editor1" value="#{editorView.text}" height="300" style="margin-bottom:10px"/>
+
+                <p:commandButton value="commenter" update="display" oncomplete="PF('dlg').show()" icon="ui-icon-disk" />
+                <p:commandButton value="effacer" type="button" onclick="PF('editor1').clear();" icon="ui-icon-close" />
+
+                <p:dialog header="Content" widgetVar="dlg" showEffect="fade" hideEffect="fade">
+                    <p:outputPanel id="display">
+                        <h3 style="margin-top:0">Basic</h3>
+                        <h:outputText value="#{editorView.text}" escape="false" />
+
+                        <h3>Custom</h3>
+                        <h:outputText value="#{editorView.text2}" escape="false" />
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
+            <p:messages autoUpdate="true"/>
+
+
+
+            </c:forEach>
+
         </p:layoutUnit>
     </p:layout>
 
