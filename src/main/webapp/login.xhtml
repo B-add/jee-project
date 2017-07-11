@@ -50,7 +50,7 @@
 
             <div align="center">
                 <h:outputText value="Mot de passe : " />
-                <p:password id="nonFeedback" value="envoyer le pass" />
+                <p:password class="nonFeedback" value="envoyer le pass" />
             </div>
 
                 <div align="center">
@@ -64,20 +64,20 @@
                 <h1> S'inscrire</h1>
 
             <div align="center">
-            <h:outputText value="Identifiant : " />
+            <h:outputText value="Identifiant : " binding="#{newUsername}"/>
                 <p:inputText  value="envoyer l'identifiant"/>
             </div>
 
 
             <div align="center">
-                <h:outputText value="email : " />
+                <h:outputText value="email : " binding="#{newEmail}"/>
                 <p:inputText  value="envoyer l'email"/>
             </div>
 
 
-            <div align="center">
-                <h:outputText value="Mot de passe : " />
-                <p:inputText  id="nonFeedback" value="envoyer le mdp"/>
+           <div align="center">
+                <h:outputText value="Mot de passe : " binding="#{newMdp}"/>
+                <p:inputText  class="nonFeedback" value="envoyer le mdp"/>
             </div>
 
 
@@ -86,11 +86,11 @@
 
                 <div align="center">
                     <h:outputText value="Mot de passe : " />
-                    <p:password id="nonFeedback" value="get le password" />
+                    <p:password class="nonFeedback" value="get le password" />
                 </div>
 
             <div align="center">
-                <p:commandButton actionListener="Action de se logger" title="S'inscrire"/>
+                <p:commandButton actionListener="#{usersView.addUser(newUsername.value, newEmail.value, newMdp.value)}" title="S'inscrire"/>
             </div>
 
             </div>
