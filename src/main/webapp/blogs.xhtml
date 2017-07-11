@@ -78,6 +78,27 @@
                     </h:panelGrid>
                 </p:dataScroller>
             </h:form>
+
+            <p:dataTable value="#{blogsView.blogs}" var="blog">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Blog ID"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{blog.id}"></h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Blog Name"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{blog.title}"></h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Author"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{blog.owner.username}"></h:outputText>
+                </p:column>
+            </p:dataTable>
         </p:layoutUnit>
     </p:layout>
 
