@@ -87,7 +87,7 @@
                         Liste des blogs
                     </f:facet>
 
-                    <p:outputPanel>
+                    <p:outputPanel rendered="#{blog.isArchived eq false}">
                         <h:panelGrid columns="2" cellpadding="5">
                             <h:outputText value="Titre :" />
                             <h:outputText value="#{blog.title}" style="font-weight: bold"/>
@@ -100,6 +100,7 @@
                                 <f:param name="blogId" value="#{blog.id}" />
                             </p:link>
                             <p:separator />
+                            <p:commandButton ajax="false" value="Supprimer" action="#{blogsView.deleteBlog(blog.id)}" rendered="#{blog.owner.id ne 2}" />
                         </h:panelGrid>
                     </p:outputPanel>
                 </p:dataScroller>

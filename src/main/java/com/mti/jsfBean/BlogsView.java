@@ -107,4 +107,35 @@ public class BlogsView {
             e.printStackTrace();
         }
     }
+
+    public void deleteBlog(int id) {
+        try {
+            MultivaluedMap formData = new MultivaluedHashMap();
+            formData.add("isArchive", "true");
+            Client client = ClientBuilder.newClient();
+
+            StringBuilder sb = new StringBuilder("http://localhost:8080/jee-project/api/blogs/");
+            WebTarget resource = client.target(sb.append(id).append("/setArchived").toString());
+
+            Invocation.Builder request = resource.request();
+            request.accept(MediaType.APPLICATION_JSON);
+
+            Response response = resource.request().post(Entity.form(formData));
+
+            Blog jsonResponse = response.readEntity(Blog.class);
+
+            if (response.getStatusInfo().getFamily() == Response.Status.Family.SUCCESSFUL) {
+                System.out.println(jsonResponse);
+            } else {
+                System.out.println("ERROR! " + response.getStatus());
+                System.out.println(response);
+            }
+
+            //System.out.print(result.toString());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
