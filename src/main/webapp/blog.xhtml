@@ -62,12 +62,9 @@
                     <p:commandButton value="Editer" id="editer" actionListener="action d'aller sur edition" title="Editer"/>
                 </h:form>
             </div>
-            <!--</c:forEach>-->
             <div style="display:block; text-align:center">
 
             </div>
-        </p:layoutUnit>
-        <p:layoutUnit position="south" size="300" collapsible="true">
             <h:form>
                 <p:dataScroller value="recuperer une liste de blog" var="blog" chunkSize="10">
                     <f:facet name="header">
@@ -116,6 +113,8 @@
                 </p:dialog>
             </h:form>
             <p:messages autoUpdate="true"/>
+
+            <!--</c:forEach>-->
         </p:layoutUnit>
     </p:layout>
 
