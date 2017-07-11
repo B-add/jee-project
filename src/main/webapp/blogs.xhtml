@@ -59,46 +59,52 @@
         </p:layoutUnit>
         <p:layoutUnit position="center">
             <h:form>
-                <p:dataScroller value="recuperer une liste de blog" var="blog" chunkSize="10">
+                <p:panel id="projectLabel" header="Nouveau Blog" style="margin-bottom:10px;">
+                <p:messages id="messages" />
+
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel for="projectname" value="Titre du Blog :" />
+                    <p:inputText id="projectname" value="#{blogsView.newBlogName}" label="Title">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="projectname" />
+                    <h:outputText value="" />
+
+                    <center>
+                        <p:commandButton ajax="false" value="Ajout" icon="ui-icon-disk" action="#{blogsView.saveBlog}" />
+                    </center>
+                </h:panelGrid>
+            </p:panel>
+            </h:form>
+
+
+
+
+            <h:form>
+                <p:dataScroller value="#{blogsView.blogs}" var="blog" chunkSize="10">
                     <f:facet name="header">
-                        Scroller pour afficher plus de blog
+                        Liste des blogs
                     </f:facet>
 
-                    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-                        <p:outputPanel>
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <h:outputText value="tite :" />
-                                <h:outputText value="recuperer l'autheur" style="font-weight: bold"/>
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Titre :" />
+                            <h:outputText value="#{blog.title}" style="font-weight: bold"/>
 
-                                <h:outputText value="Autheur:" />
-                                <h:outputText value="recuperer l'autheur" style="font-weight: bold"/>
+                            <h:outputText value="Autheur:" />
+                            <h:outputText value="#{blog.owner.username}" style="font-weight: bold"/>
 
-                            </h:panelGrid>
-                        </p:outputPanel>
-                    </h:panelGrid>
+                            <h:outputText value="Liens vers le blog:" />
+                            <p:link outcome="blog" value="Par ici !">
+                                <f:param name="blogId" value="#{blog.id}" />
+                            </p:link>
+                            <p:separator />
+                        </h:panelGrid>
+                    </p:outputPanel>
                 </p:dataScroller>
             </h:form>
 
-            <p:dataTable value="#{blogsView.blogs}" var="blog">
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Blog ID"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{blog.id}"></h:outputText>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Blog Name"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{blog.title}"></h:outputText>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Author"></h:outputText>
-                    </f:facet>
-                    <h:outputText value="#{blog.owner.username}"></h:outputText>
-                </p:column>
-            </p:dataTable>
         </p:layoutUnit>
     </p:layout>
 

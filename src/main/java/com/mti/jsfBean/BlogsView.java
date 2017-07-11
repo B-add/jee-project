@@ -7,11 +7,10 @@ import com.mti.services.BlogWebServices;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.*;
+import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -29,8 +28,10 @@ public class BlogsView {
 
     private ArrayList<Blog> blogs;
 
+    private String newBlogName;
+
     @PostConstruct
-    public void test() {
+    public void init() {
         try {
             Client client = ClientBuilder.newClient();
 
@@ -42,7 +43,6 @@ public class BlogsView {
             Response response = request.get();
 
             ArrayList<Blog> jsonResponse = response.readEntity(ArrayList.class);
-            System.out.println(jsonResponse);
 
             if (response.getStatusInfo().getFamily() == Response.Status.Family.SUCCESSFUL) {
                 blogs = jsonResponse;
@@ -68,5 +68,43 @@ public class BlogsView {
         this.blogs = blogs;
     }
 
+    public String getNewBlogName() {
+        return newBlogName;
+    }
 
+    public void setNewBlogName(String newBlogName) {
+        this.newBlogName = newBlogName;
+    }
+
+    public void saveBlog() {
+
+        MultivaluedMap formData = new MultivaluedHashMap();
+        formData.add("title", this.newBlogName);
+        formData.add("userId", "1");
+        try {
+            Client client = ClientBuilder.newClient();
+
+            WebTarget resource = client.target("http://localhost:8080/jee-project/api/blogs");
+
+            Invocation.Builder request = resource.request();
+            request.accept(MediaType.APPLICATION_JSON);
+
+            Response response = resource.request().post(Entity.form(formData));
+
+            Blog jsonResponse = response.readEntity(Blog.class);
+
+            if (response.getStatusInfo().getFamily() == Response.Status.Family.SUCCESSFUL) {
+                System.out.println(jsonResponse);
+            } else {
+                System.out.println("ERROR! " + response.getStatus());
+                System.out.println(response);
+            }
+
+            //System.out.print(result.toString());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
