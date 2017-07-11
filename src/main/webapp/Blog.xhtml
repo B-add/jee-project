@@ -22,7 +22,7 @@
                 <p:menuitem value="Mon blog" outcome="blog" icon="ui-icon-document">
                     <f:param name="i" value="1" />
                     -</p:menuitem>
-                <p:menuitem value="Tous les blogs" outcome="login" icon="ui-icon-search">
+                <p:menuitem value="Tous les blogs" outcome="blogs" icon="ui-icon-search">
                     <f:param name="i" value="2" />
                 </p:menuitem>
             </p:tabMenu>
@@ -36,7 +36,7 @@
                     </p:submenu>
                     <p:submenu label="Gestion">
                         <p:menuitem value="Archiver" outcome="test" icon="ui-icon-star"/>
-                        <p:menuitem value="Deconnecter" outcome="test" icon="ui-icon-star"/>
+                        <p:menuitem value="Deconnecter" outcome="login" icon="ui-icon-star"/>
 
                     </p:submenu>
                 </p:menu>
@@ -55,10 +55,10 @@
                     <p:separator />
                 </div>
             <div align="center">
-                <p:commandButton actionListener="#{buttonView.buttonAction}" title="Supprimer">
-                <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
-                </p:commandButton>
-                <p:commandButton actionListener="action d'aller sur edition" title="Editer"/>
+                <h:form>
+                <p:commandButton value="Supprimer" id="supprmier" actionListener="#{buttonView.buttonAction}" />
+                <p:commandButton value="Editer" id="editer" actionListener="action d'aller sur edition" title="Editer"/>
+         </h:form>
             </div>
            <!--</c:forEach>-->
             <div style="display:block; text-align:center">

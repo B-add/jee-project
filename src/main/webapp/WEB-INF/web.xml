@@ -21,7 +21,7 @@
 
   <!-- Welcome page -->
   <welcome-file-list>
-    <welcome-file>faces/account.xhtml</welcome-file>
+    <welcome-file>faces/login.xhtml</welcome-file>
   </welcome-file-list>
 
   <!-- JSF mapping -->

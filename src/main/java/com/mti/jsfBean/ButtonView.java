@@ -12,7 +12,8 @@ import javax.faces.event.ActionEvent;
 @ManagedBean
 public class ButtonView {
     public void buttonAction(ActionEvent actionEvent) {
-        addMessage("Welcome to Primefaces!!");
+        addMessage("Data saved");
+        System.out.println("test");
     }
 
     public void addMessage(String summary) {
