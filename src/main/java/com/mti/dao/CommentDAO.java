@@ -83,4 +83,17 @@ public class CommentDAO extends DAO<Comment> {
         }
         return true;
     }
+
+    public ArrayList<Comment> getCommentByPostId(int postId) {
+        ArrayList<Comment> comments;
+        try {
+            comments = new ArrayList(manager.createQuery("SELECT comment FROM Comment comment WHERE comment.post.id = :postId")
+                    .setParameter("postId", postId)
+                    .getResultList());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new NotFoundException();
+        }
+        return comments;
+    }
 }

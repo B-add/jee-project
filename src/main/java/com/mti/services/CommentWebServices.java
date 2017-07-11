@@ -71,4 +71,13 @@ public class CommentWebServices {
                         @PathParam("commentId") final Integer commentId) throws NotFoundException {
         return cdao.delete(commentId);
     }
+
+
+    @POST
+    @Path("/getCommentByPost/")
+    @Consumes("application/x-www-form-urlencoded")
+    public ArrayList<Comment> getCommentByPostId(@Context final HttpServletRequest request,
+                           @FormParam("postId") String postId) throws NotFoundException, SystemException {
+        return cdao.getCommentByPostId(Integer.parseInt(postId));
+    }
 }
