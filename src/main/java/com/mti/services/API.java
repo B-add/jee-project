@@ -19,6 +19,7 @@ public class API extends Application {
         resources.add(UserWebServices.class);
         resources.add(BlogWebServices.class);
         resources.add(PostWebServices.class);
+        resources.add(CommentWebServices.class);
         return resources;
     }
 }
