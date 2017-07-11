@@ -24,4 +24,10 @@ public class Post {
 
     @Column(name = "body")
     private String body;
+
+    @ManyToOne
+    private User author;
+
+    @ManyToOne
+    private Blog blog;
 }
